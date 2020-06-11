@@ -2,24 +2,23 @@ const { Todo } = require('../models');
 
 const authorization = (req, res, next) => {
     const { id } = req.params;
-// console.log(id);
+
     Todo.findByPk(id)
         .then((data) => {
             if (!data) {
-                res.status(404).json({ 
-                    msg: `Todo with id ${id} not found` 
+                next({
+                    name: `TODO_NOT_FOUND`,
+                    id
                 })
             } else if (data.UserId !== req.user.id) {
-                res.status(403).json({
-                    msg: `You are not authorized to do this`
+                next({
+                    name: `NOT_AUTHORIZED`,
                 })
             } else {
                 next()
             }
         }).catch((err) => {
-            res.status(500).json({
-                msg: `Internal server error`
-            })
+            next(err);
         });
 }
 

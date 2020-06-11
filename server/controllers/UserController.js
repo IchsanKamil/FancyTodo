@@ -3,7 +3,7 @@ const { compare } = require('../helpers/bcrypt.js');
 const { generateToken } = require('../helpers/jwt.js');
 
 class UserController {
-    static register(req, res) {
+    static register(req, res, next) {
         const { email, password } = req.body;
         const newUser = { email, password };
 
@@ -14,11 +14,11 @@ class UserController {
 
                 res.status(201).json(data);
             }).catch((err) => {
-                res.status(400).json(err);
+                next(err)
             });
     }
 
-    static login(req, res) {
+    static login(req, res, next) {
         const { email, password } = req.body;
 
         User.findOne({
@@ -34,20 +34,14 @@ class UserController {
                         const access_token = generateToken(payload);
 
                         res.status(201).json({ access_token });
-                    } else {
-                        res.status(400).json({
-                            msg: `Password doesn't match`
-                        });
-                    }   
-                } else {
-                    res.status(400).json({
-                        msg: `Email doesn't exist`
-                    });
-                }
+                    } else next({
+                        name: `PASSWORD_NOT_MATCH`
+                    })
+                } else next({
+                    name: `EMAIL_NOT_EXIST`
+                })
             }).catch((err) => {
-                res.status(500).json({
-                    msg: `Internal server error`
-                });
+                next(err);
             });
     }
 }
