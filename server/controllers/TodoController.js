@@ -1,85 +1,83 @@
 const { Todo } = require('../models');
 
 class TodoController {
-    static create(req, res) {
+    static create(req, res, next) {
         const { title, description, due_date } = req.body;
-        const newTodo = { title, description, due_date };
+        const UserId = req.user.id
+        const newTodo = { title, description, due_date, UserId };
 
         Todo.create(newTodo)
             .then((data) => {
-                res.status(201).json(data);
+                res.status(201).json({
+                    msg: `Todo successfully created`,
+                    data
+                });
             }).catch((err) => {
-                res.status(500).json({
-                    msg: `Internal server error`
-                })
+                next(err);
             });
     }
 
-    static index(req, res) {
+    static findAll(req, res, next) {
         Todo.findAll({
+            where: { UserId: req.user.id },
             order: [['due_date', 'ASC']]
         })
             .then((data) => {
                 res.status(200).json(data);
             }).catch((err) => {
-                res.status(500).json({
-                    msg: `Internal server error`
-                })
+                next(err);
             });
     }
 
-    static update(req, res) {
+    static findOne(req, res, next) {
         const { id } = req.params;
-        const { title, description, status, due_date } = req.body;
-        const todo = { title, description, status, due_date };
 
         Todo.findByPk(id)
-            .then((result) => {
-                if (result) {
-                    return Todo.update(todo, {
-                        where: { id },
-                        returning: true
-                    })
-                } else {
-                    res.status(404).json({
-                        msg: `Todo with id ${id} not found`
-                    })
-                }
-            })
-            .then(data => {
+            .then((data) => {
                 res.status(200).json(data)
-            })
-            .catch((err) => {
-                res.status(500).json({
-                    msg: `Internal server error`
-                })
+            }).catch((err) => {
+                next(err)
             });
     }
 
-    static destroy(req, res) {
+    static update(req, res, next) {
+        const { id } = req.params;
+        const { title, description, status, due_date } = req.body;
+        const updateTodo = { title, description, status, due_date };
+
+        Todo.update(updateTodo, {
+            where: { id }
+        })
+            .then(() => {
+                res.status(200).json({
+                    msg: `Todo successfully updated`,
+                    updateTodo
+                });
+            })
+            .catch((err) => {
+                next(err);
+            });
+    }
+
+    static destroy(req, res, next) {
         const { id } = req.params;
         let deleteTodo;
 
         Todo.findByPk(id)
             .then((result) => {
-                if (result) {
-                    deleteTodo = result;
-                    return Todo.destroy({
-                        where: { id },
-                    })
-                } else {
-                    res.status(404).json({
-                        msg: `Todo with id ${id} not found`
-                    })
-                }
+                deleteTodo = result;
+                return Todo.destroy({
+                    where: { id },
+                })
             })
             .then(() => {
-                res.status(200).json(deleteTodo)
+                res.status(200).json({
+                    msg: `Todo successfully deleted`,
+                    deleteTodo
+                })
             })
             .catch((err) => {
-                res.status(500).json({
-                    msg: `Internal server error`
-                })
+                next(err);
             });
     }
 }

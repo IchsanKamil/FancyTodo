@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     hooks: {
-      beforeCreate: (user) => {
+      beforeCreate: user => {
         user.password = encrypt(user.password);
       }
     }
@@ -42,6 +42,7 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = function (models) {
     // associations can be defined here
+    User.hasMany(models.Todo);
   };
 
   return User;

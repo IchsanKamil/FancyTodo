@@ -3,7 +3,7 @@
 module.exports = (sequelize, DataTypes) => {
   const { Model } = sequelize.Sequelize;
 
-  class Todo extends Model {}
+  class Todo extends Model { }
 
   Todo.init({
     title: {
@@ -27,8 +27,20 @@ module.exports = (sequelize, DataTypes) => {
           msg: `Date must be greater than today`
         }
       }
+    },
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `UserId can't be null`
+        },
+        notEmpty: {
+          msg: `UserId can't be empty`
+        }
+      }
     }
-  }, { 
+  }, {
     sequelize,
     hooks: {
       beforeCreate: todo => {
@@ -37,9 +49,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  Todo.associate = function(models) {
+  Todo.associate = function (models) {
     // associations can be defined here
+    Todo.belongsTo(models.User)
   };
-  
+
   return Todo;
 };
