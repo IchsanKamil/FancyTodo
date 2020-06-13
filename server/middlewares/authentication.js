@@ -2,13 +2,13 @@ const { User } = require('../models');
 const { verify } = require('../helpers/jwt.js');
 
 const authentication = (req, res, next) => {
-    const { access_token } = req.headers;
+    const { token } = req.headers;
 
-    if (!access_token) next({
+    if (!token) next({
         name: `TOKEN_NOT_FOUND`
     })
 
-    const decode = verify(access_token);
+    const decode = verify(token);
     req.user = decode;
     const { id } = req.user;
 
