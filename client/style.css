@@ -1,0 +1,12 @@
+#navbar-custom a {
+    color: palevioletred;
+}
+
+#navbar-custom a:hover {
+    color: mediumvioletred;
+}
+
+.jumbotron-custom {
+    color: white;
+    background-color: palevioletred;
+}

@@ -8,15 +8,12 @@ class UserController {
         let { id_token } = req.body;
         let email;
         const client = new OAuth2Client(process.env.CLIENT_ID);
-        // console.log(client);
         client.verifyIdToken({
             idToken: id_token,
             audience: process.env.CLIENT_ID
         })
             .then(ticket => {
-                // console.log(ticket, '<<< ticket');
                 email = ticket.getPayload().email;
-                // console.log(email, '<<< ticket.getPayload');
 
                 return User.findOne({
                     where: { email }
