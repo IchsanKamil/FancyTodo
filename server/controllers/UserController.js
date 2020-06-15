@@ -50,7 +50,7 @@ class UserController {
     static register(req, res, next) {
         const { email, password } = req.body;
         const newUser = { email, password };
-
+        console.log(newUser, '<<<<< register controller');
         User.create(newUser)
             .then((result) => {
                 const { id, email, password } = result;
@@ -65,6 +65,7 @@ class UserController {
     static login(req, res, next) {
         console.log('masuk login');
         const { email, password } = req.body;
+        console.log(req.body, 'login');
 
         User.findOne({
             where: { email }

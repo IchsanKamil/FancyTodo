@@ -5,7 +5,7 @@ class TodoController {
         const { title, description, due_date } = req.body;
         const UserId = req.user.id
         const newTodo = { title, description, due_date, UserId };
-
+        console.log(newTodo, '<<<<< new Todo');
         Todo.create(newTodo)
             .then((data) => {
                 res.status(201).json({

@@ -13,18 +13,36 @@
     <title>Fancy Todo</title>
 </head>
 
-<!-- <td>
-    <button type="submit" class="btn btn-outline-success mb-2">Login</button>
-    <a href="#"></a>
-</td> -->
-
 <body>
+
+    <!-- Register -->
+
+    <section class="register-page">
+        <div class="row justify-content-center mt-5">
+            <div class="col-4">
+                <form onsubmit="register(event)">
+                    <div class="form-group">
+                        <label for="email">Email :</label>
+                        <input type="text" class="form-control" name="email" id="emailRegister"
+                            placeholder="e.g: foobar@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password :</label>
+                        <input type="password" class="form-control" name="password" id="passwordRegister" required
+                            placeholder="password">
+                    </div>
+                    <button type="submit" class="btn btn-outline-success mx -2">Register</button>
+                    <button type="submit" class="btn btn-outline-warning" onclick="auth()">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
     <!-- Login -->
 
     <section class="login-page">
         <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="navbar-custom">
-            <a class="navbar-brand" href="/"><i class="fas fa-book"></i> RTodo</a>
+            <a class="navbar-brand" href="/"><i class="far fa-check-square"></i> RenTodo</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -55,8 +73,9 @@
                         <input type="password" class="form-control" name="password" id="password" required
                             placeholder="12345678">
                     </div>
-                    <button type="submit" class="btn btn-outline-success mb-2">Login</button>
-                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                    <button type="submit" class="btn btn-outline-success">Login</button>
+                    <a class="btn btn-outline-info mx-2" href="#" onclick="registerForm()">Register</a>
+                    <div class="g-signin2 mt-3" data-onsuccess="onSignIn"></div>
                 </form>
             </div>
         </div>
@@ -67,7 +86,7 @@
     <section class="home-page">
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="navbar-custom">
-                <a class="navbar-brand" href="/"><i class="far fa-check-square"></i> RenTodo</a>
+                <a class="navbar-brand" href="#" onclick="auth()"><i class="far fa-check-square"></i> RenTodo</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -76,7 +95,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="myTodo()">My Todo</a>
+                            <a class="nav-link" href="#" onclick="auth()">My Todo</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" onclick="fetchPublicHolidays()">Public Holidays</a>
@@ -91,7 +110,7 @@
 
         <div class="container">
             <h1 class="text-center mb-3">Todo List</h1>
-            <a href="#" class="btn btn-sm btn-outline-info" onclick="addTodo()">Add Todo</a>
+            <a href="#" class="btn btn-sm btn-outline-info" onclick="addTodoForm()">Add Todo</a>
             <table class="table table-hover mt-3 text-center">
                 <thead class="thead-light">
                     <tr>
@@ -100,6 +119,7 @@
                         <th>Description</th>
                         <th>Status</th>
                         <th>Due Date</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody class="table-data">
@@ -109,28 +129,105 @@
         </div>
     </section>
 
-    <!-- Register -->
+    <!-- Add Todo -->
 
-    <!-- <section class="register-page">
-        <div class="row justify-content-center mt-5">
-            <div class="col-4">
-                <form onsubmit="register(event)">
-                    <div class="form-group">
-                        <label for="email">Email :</label>
-                        <input type="text" class="form-control" name="email" id="emailRegister"
-                            placeholder="e.g: foobar@gmail.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password :</label>
-                        <input type="password" class="form-control" name="password" id="passwordRegister" required
-                            placeholder="12345678">
-                    </div>
-                    <button type="submit" class="btn btn-outline-success mb-2">Register</button>
-                    <p id="register-status"></p>
-                </form>
+    <section class="add-todo">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="navbar-custom">
+                <a class="navbar-brand" href="/"><i class="far fa-check-square"></i> RenTodo</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="auth()">My Todo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="fetchPublicHolidays()">Public Holidays</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="col-8">
+                    <form onsubmit="addTodo(event)">
+                        <div class="form-group">
+                            <label for="title">Title :</label>
+                            <input type="text" class="form-control" name="title" id="title" placeholder="e.g: Harimau di Dalam Kubur">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description :</label>
+                            <input type="textarea" class="form-control" name="description" id="description" required placeholder="The most powerful scene in a movie">
+                        </div>
+                        <div class="form-group">
+                            <label for="due_date">Due Date :</label>
+                            <input type="date" class="form-control" name="due_date" id="due_date" required>
+                        </div>
+                        <button type="submit" class="btn btn-outline-success mb-2">Add</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </section> -->
+    </section>
+
+    <!-- Edit Todo -->
+
+    <section class="edit-todo">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="navbar-custom">
+                <a class="navbar-brand" href="/"><i class="far fa-check-square"></i> RenTodo</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="auth()">My Todo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="fetchPublicHolidays()">Public Holidays</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="col-8">
+                    <form onsubmit="updateTodo(event)">
+                        <div class="form-group">
+                            <label for="title">Title :</label>
+                            <input type="text" class="form-control" name="title" id="titleEdit" value=" ">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description :</label>
+                            <input type="textarea" class="form-control" name="description" id="descriptionEdit" required placeholder="Not connect yet to server">
+                        </div>
+                        <div class="form-group">
+                            <label for="due_date">Due Date :</label>
+                            <input type="date" class="form-control" name="due_date" id="due_dateEdit" required>
+                        </div>
+                        <button type="submit" class="btn btn-outline-success mb-2">Edit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Public Holidays -->
 
@@ -146,7 +243,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="myTodo()">My Todo</a>
+                            <a class="nav-link" href="#" onclick="auth()">My Todo</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" onclick="fetchPublicHolidays()">Public Holidays</a>
@@ -175,58 +272,7 @@
                 </tbody>
             </table>
         </div>
-    </section>
-
-    <!-- Add Todo -->
-
-    <section class="add-todo">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="navbar-custom">
-                <a class="navbar-brand" href="/"><i class="far fa-check-square"></i> RenTodo</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="myTodo()">My Todo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="fetchPublicHolidays()">Public Holidays</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="logout()">Logout</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-
-        <div class="container">
-            <div class="row justify-content-center mt-5">
-                <div class="col-8">
-                    <form onsubmit="addTodo(event)">
-                        <div class="form-group">
-                            <label for="title">Title :</label>
-                            <input type="text" class="form-control" name="title" id="title" placeholder="Not connect yet to server">
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Description :</label>
-                            <input type="textarea" class="form-control" name="description" id="description" required placeholder="Not connect yet to server">
-                        </div>
-                        <div class="form-group">
-                            <label for="due_date">Due Date :</label>
-                            <input type="date" class="form-control" name="due_date" id="due_date" required>
-                        </div>
-                        <button type="submit" class="btn btn-outline-success mb-2">Add</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    
+    </section>    
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"
