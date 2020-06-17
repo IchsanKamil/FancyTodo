@@ -32,20 +32,19 @@ _Response (201 - Created)_
 ```
 {
   "id": <given id by system>,
-  "email": "<posted email>",
-  "password": "<posted password after hashing>"
+  "email": "<posted email>"
 }
 ```
 _Response (400 - Bad Request)_
 ```json
 {
-  "msg": "[validation error]"
+  "message": "Email can't be empty, Email already exist, Password must be between 7 & 20 characters"
 }
 ```
 _Response (500 - Internal Server Error)_
 ```json
 {
-    "msg": "Internal server error"
+    "message": "Internal server error"
 }
 ```
 ---
@@ -70,7 +69,7 @@ _Response (200 - Ok)_
 _Response (400 - Bad Request)_
 ```json
 {
-  "msg": "Email/Password not match"
+  "message": "Email/Password not match"
 }
 ```
 _Response(500 - Error Server)_
@@ -87,7 +86,7 @@ _Response(500 - Error Server)_
 _Request Body_
 ```
 {
-    "email": "<your google email>"
+    "id_token": "<token from google>"
 }
 ```
 _Response (200 - Ok)_
@@ -139,7 +138,7 @@ _Response (201 - Created)_
 _Response (400 - Bad Request)_
 ```json
 {
-  "msg": "[validation error]"
+  "message": "Tittle can't be empty, Date must be greater than today"
 }
 ```
 _Re sponse(500 - Error Server)_
@@ -217,7 +216,7 @@ _Response (200 - Ok)_
 _Response (404 - Not Found)_
 ```json
 {
-    "msg": "not found"
+    "message": "not found"
 }
 ```
 _Re sponse(500 - Error Server)_
@@ -262,7 +261,7 @@ _Response (201 - Updated)_
 _Response (400 - Bad Request)_
 ```json
 {
-  "msg": "[validation error]"
+  "message": "Title can't be empty, Date must be greater than today"
 }
 ```
 _Re sponse(500 - Error Server)_
@@ -291,7 +290,7 @@ _Request Header_
 _Response (200 - oK)_
 ```json
 {
-    "msg": "Todo successfully deleted"
+    "message": "Todo successfully deleted"
 }
 ```
 _Re sponse(500 - Error Server)_

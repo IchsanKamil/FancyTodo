@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       validate: {
         notEmpty: {
-          msg: `Email can't be empty`
+          message: `Email can't be empty`
         },
         isEmail: {
-          msg: `Enter a valid email address`
+          message: `Enter a valid email address`
         }
       }
     },
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: {
           args: [7, 20],
-          msg: `Password must be between 7 & 20 characters`
+          message: `Password must be between 7 & 20 characters`
         }
       }
     }
