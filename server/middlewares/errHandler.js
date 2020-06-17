@@ -20,7 +20,7 @@ module.exports = (err, req, res, next) => {
 
         case 'SequelizeUniqueConstraintError':
             code = 401
-            message = err.errors[0].message
+            message = `Email already exist`
             break;
 
         case 'INVALID_USER':

@@ -42,17 +42,14 @@ class TodoController {
 
     static update(req, res, next) {
         const { id } = req.params;
-        const { title, description, status, due_date } = req.body;
-        const updateTodo = { title, description, status, due_date };
+        const { title, description, due_date } = req.body;
+        const updateTodo = { title, description, due_date };
 
         Todo.update(updateTodo, {
             where: { id }
         })
             .then(() => {
-                res.status(200).json({
-                    msg: `Todo successfully updated`,
-                    updateTodo
-                });
+                res.status(200).json(updateTodo);
             })
             .catch((err) => {
                 next(err);

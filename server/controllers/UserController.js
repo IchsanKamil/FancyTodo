@@ -35,11 +35,9 @@ class UserController {
                     email: data.email
                 }
                 return res.status(201).json({
-                    data: {
                         id: data.id,
                         email: data.email,
                         token: generateToken(payload)
-                    }
                 })
             })
             .catch(err => {
