@@ -38,7 +38,7 @@ _Response (201 - Created)_
 _Response (400 - Bad Request)_
 ```json
 {
-  "message": "Email can't be empty, Email already exist, Password must be between 7 & 20 characters"
+    "message": "Email can't be empty, Email already exist, Password must be between 7 & 20 characters"
 }
 ```
 _Response (500 - Internal Server Error)_
@@ -61,15 +61,15 @@ _Request Body_
 _Response (200 - Ok)_
 ```
 {
-  "id": <given id by system>,
-  "email": "<posted email>",
-  "token": "<your token>"
+    "id": <given id by system>,
+    "email": "<posted email>",
+    "token": "<your token>"
 }
 ```
 _Response (400 - Bad Request)_
 ```json
 {
-  "message": "Email/Password not match"
+    "message": "Email/Password not match"
 }
 ```
 _Response(500 - Error Server)_
@@ -92,9 +92,9 @@ _Request Body_
 _Response (200 - Ok)_
 ```
 {
-  "id": <given id by system>,
-  "email": "<posted email>",
-  "token": "<your token>"
+    "id": <given id by system>,
+    "email": "<posted email>",
+    "token": "<your token>"
 }
 ```
 _Re sponse(500 - Error Server)_
@@ -138,7 +138,7 @@ _Response (201 - Created)_
 _Response (400 - Bad Request)_
 ```json
 {
-  "message": "Tittle can't be empty, Date must be greater than today"
+    "message": "Tittle can't be empty, Date must be greater than today"
 }
 ```
 _Re sponse(500 - Error Server)_
@@ -261,7 +261,7 @@ _Response (201 - Updated)_
 _Response (400 - Bad Request)_
 ```json
 {
-  "message": "Title can't be empty, Date must be greater than today"
+    "message": "Title can't be empty, Date must be greater than today"
 }
 ```
 _Re sponse(500 - Error Server)_
