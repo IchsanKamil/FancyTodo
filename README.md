@@ -97,7 +97,7 @@ _Response (200 - Ok)_
     "token": "<your token>"
 }
 ```
-_Re sponse(500 - Error Server)_
+_Response(500 - Error Server)_
 
 ```json
 {
@@ -141,7 +141,7 @@ _Response (400 - Bad Request)_
     "message": "Tittle can't be empty, Date must be greater than today"
 }
 ```
-_Re sponse(500 - Error Server)_
+_Response(500 - Error Server)_
 
 ```json
 {
@@ -183,7 +183,7 @@ _Response (200 - Ok)_
     }
 ]
 ```
-_Re sponse(500 - Error Server)_
+_Response(500 - Error Server)_
 
 ```json
 {
@@ -264,7 +264,7 @@ _Response (400 - Bad Request)_
     "message": "Title can't be empty, Date must be greater than today"
 }
 ```
-_Re sponse(500 - Error Server)_
+_Response(500 - Error Server)_
 
 ```json
 {
@@ -293,7 +293,7 @@ _Response (200 - oK)_
     "message": "Todo successfully deleted"
 }
 ```
-_Re sponse(500 - Error Server)_
+_Response(500 - Error Server)_
 
 ```json
 {
