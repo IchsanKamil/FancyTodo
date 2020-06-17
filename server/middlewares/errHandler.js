@@ -13,14 +13,9 @@ module.exports = (err, req, res, next) => {
             msg = errors
             break;
 
-        case 'PASSWORD_NOT_MATCH':
+        case 'EMAIL/PASSWORD_NOT_MATCH':
             code = 400
-            msg = `Password doesn't match`
-            break;
-
-        case 'EMAIL_NOT_EXIST':
-            code = 400
-            msg = `Email doesn't exist`
+            msg = `Email/Password not match`
             break;
 
         case 'SequelizeUniqueConstraintError':

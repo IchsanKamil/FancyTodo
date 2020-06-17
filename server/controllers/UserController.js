@@ -43,7 +43,7 @@ class UserController {
                 })
             })
             .catch(err => {
-                console.log(err, '<<<<<< err router google');
+                next(err);
             })
     }
 
@@ -85,10 +85,10 @@ class UserController {
                             token
                         });
                     } else next({
-                        name: `PASSWORD_NOT_MATCH`
+                        name: `EMAIL/PASSWORD_NOT_MATCH`
                     })
                 } else next({
-                    name: `EMAIL_NOT_EXIST`
+                    name: `EMAIL/PASSWORD_NOT_EXIST`
                 })
             }).catch((err) => {
                 next(err);

@@ -192,11 +192,12 @@ function deleteTodo(id) {
         }
     })
         .done((data) => {
-            console.log(data, 'success add');
+            console.log(data, 'success delete');
             fetchTodos()
+            $('#confirmDelete').modal('hide')
         })
         .fail(err => {
-            console.log(err.responseJSON, '<<<<< err addTodo');
+            console.log(err.responseJSON, '<<<<< err delete');
         })
 }
 
@@ -220,7 +221,7 @@ function fetchTodos() {
                     <td>${todo.due_date}</td>
                     <th>
                         <a href="#" class="btn btn-outline-primary btn-sm" onclick="editTodoForm(${todo.id})">Edit</a>
-                        <a href="#" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure to delete this todo ?'); deleteTodo(${todo.id})">Delete</a>
+                        <a href="#" class="btn btn-outline-danger btn-sm" onclick="deleteTodoConfirm(${todo.id})" data-toggle="modal" data-target="#confirmDelete">Delete</a>
                     </th>
                 </tr>
                 `)
@@ -229,6 +230,31 @@ function fetchTodos() {
         .fail(err => {
             console.log(err, '<<< err fetchTodos');
         })
+}
+
+function deleteTodoConfirm(id) {
+    $('.confirm').append(`
+    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Delete this todo ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="deleteTodo(${id})">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    `)
+    $('#confirmDelete').modal('show')
 }
 
 function fetchPublicHolidays() {
